@@ -2,12 +2,38 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exam Application</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div id="root"></div>
-    <script src="src/index.js" type="text/javascript"></script>
+    <div class="container">
+        <h1>Technical Writing Exam</h1>
+        <div id="timer"></div>
+        <form id="exam-form">
+            <div class="question">
+                <label>1. Read the passage and answer the question:</label>
+                <textarea name="q1" required></textarea>
+            </div>
+            <div class="question">
+                <label>2. Write a summary of the following text:</label>
+                <textarea name="q2" required></textarea>
+            </div>
+            <div class="question">
+                <label>3. Describe the process shown in the diagram:</label>
+                <textarea name="q3" required></textarea>
+            </div>
+            <div class="question">
+                <label>4. Analyze the graph and explain the trend:</label>
+                <textarea name="q4" required></textarea>
+            </div>
+            <div class="question">
+                <label>5. Answer the technical writing question:</label>
+                <textarea name="q5" required></textarea>
+            </div>
+            <button type="submit">Submit Exam</button>
+        </form>
+        <div id="result" style="display:none;"></div>
+    </div>
+    <script src="script.js"></script>
 </body>
 </html>

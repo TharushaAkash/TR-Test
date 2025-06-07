@@ -1,12 +1,11 @@
 # Exam Application
 
-This project is an online exam application designed for students to attempt a technical writing examination. The application features a series of questions based on reading comprehension, summary writing, process description, and graph analysis. 
+This project is a static online exam application designed for students to attempt a technical writing examination. The application features a series of questions based on reading comprehension, summary writing, process description, and graph analysis.
 
 ## Features
 
 - **Multiple Questions**: The exam consists of five questions, each focusing on different aspects of technical writing.
 - **Timer**: A countdown timer is implemented to keep track of the remaining time for the exam.
-- **Automated Grading**: The application utilizes an AI API to check students' answers and provide instant feedback on their performance.
 - **Results Display**: After completing the exam, students can view their scores and receive feedback based on their answers.
 
 ## Project Structure
@@ -15,37 +14,21 @@ The project is organized as follows:
 
 ```
 exam-app
-├── public
-│   └── index.html          # Main HTML entry point
-├── src
-│   ├── components          # React components for each question and functionality
-│   ├── api                 # API interactions for answer checking
-│   ├── App.jsx             # Main application component
-│   ├── index.js            # Entry point for the React application
-│   └── styles              # CSS styles for the application
-├── package.json            # Project metadata and dependencies
-└── .gitignore              # Files and directories to ignore in version control
+├── index.html              # Main HTML file
+├── styles.css              # CSS styles for the application
+├── script.js               # JavaScript for timer and exam logic
+└── assets                  # Images or other static assets
 ```
 
 ## Setup Instructions
 
-1. **Clone the Repository**: 
+1. **Download or Clone the Repository**: 
    ```
    git clone <repository-url>
    cd exam-app
    ```
 
-2. **Install Dependencies**: 
-   ```
-   npm install
-   ```
-
-3. **Run the Application**: 
-   ```
-   npm start
-   ```
-
-4. **Access the Application**: Open your web browser and navigate to `http://localhost:3000` to access the exam application.
+2. **Open the Application**: Open `index.html` in your web browser to access the exam application.
 
 ## Usage
 
