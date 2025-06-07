@@ -4,36 +4,286 @@
     <meta charset="UTF-8">
     <title>Exam Application</title>
     <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Additional inline styles for enhanced UI */
+        .exam-header {
+            background: #003366;
+            color: #fff;
+            padding: 24px 16px 16px 16px;
+            border-radius: 8px 8px 0 0;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+        .instructions {
+            background: #e9f5ff;
+            border-left: 4px solid #007bff;
+            padding: 16px;
+            margin-bottom: 24px;
+            border-radius: 4px;
+        }
+        .question-card {
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 28px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            padding: 24px 20px;
+            display: none;
+        }
+        .question-card.active {
+            display: block;
+        }
+        .question-title {
+            font-size: 1.15em;
+            font-weight: bold;
+            color: #003366;
+            margin-bottom: 10px;
+        }
+        .marks {
+            float: right;
+            color: #007bff;
+            font-weight: bold;
+        }
+        .passage, .graph-desc, .diagram-desc, .original-text, .summary-gaps {
+            background: #f8f9fa;
+            border-left: 3px solid #007bff;
+            padding: 12px 16px;
+            margin: 12px 0 18px 0;
+            border-radius: 4px;
+            font-size: 1em;
+        }
+        .summary-gaps input {
+            width: 110px;
+            margin: 0 4px;
+            padding: 2px 4px;
+            border-radius: 3px;
+            border: 1px solid #ccc;
+        }
+        .clear {
+            clear: both;
+        }
+        .nav-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 18px;
+        }
+        .nav-buttons button {
+            padding: 8px 24px;
+            font-size: 1em;
+            border-radius: 4px;
+            border: none;
+            background: #007bff;
+            color: #fff;
+            cursor: pointer;
+        }
+        .nav-buttons button[disabled] {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        @media (max-width: 600px) {
+            .question-card { padding: 14px 6px; }
+            .exam-header { padding: 14px 6px 8px 6px; }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Technical Writing Exam</h1>
+        <div class="exam-header">
+            <h2>Sri Lanka Institute of Information Technology</h2>
+            <div>BSc (Hons) in Information Technology</div>
+            <div>Final Examination – Question Paper</div>
+            <div>Year 1, Semester 2 (2025)</div>
+            <div><strong>IT1150 – Technical Writing</strong></div>
+            <div>Duration: 3 Hours &nbsp;|&nbsp; Total Marks: 100</div>
+        </div>
         <div id="timer"></div>
+        <div class="instructions">
+            <strong>Instructions:</strong>
+            <ul>
+                <li>Answer <strong>ALL</strong> questions</li>
+                <li>Read all questions carefully before answering</li>
+                <li>Allocate your time appropriately for each section</li>
+                <li>Write clearly and legibly</li>
+            </ul>
+        </div>
         <form id="exam-form">
-            <div class="question">
-                <label>1. Read the passage and answer the question:</label>
-                <textarea name="q1" required></textarea>
+            <!-- Question 1 -->
+            <div class="question-card active" id="qpage-1">
+                <div class="question-title">
+                    Question 1 – Reading Comprehension <span class="marks">(12 marks)</span>
+                    <div class="clear"></div>
+                </div>
+                <div class="passage">
+                    <strong>The Rise of Remote Work Technology</strong><br>
+                    The global shift towards remote work has fundamentally transformed how organizations operate and communicate. Cloud computing platforms have become the backbone of modern remote work infrastructure, enabling employees to access company resources from anywhere with an internet connection. Video conferencing tools like Zoom, Microsoft Teams, and Google Meet have replaced traditional face-to-face meetings, allowing teams to collaborate effectively across geographical boundaries.<br><br>
+                    Project management software has evolved to accommodate distributed teams, with platforms like Slack, Trello, and Asana providing centralized spaces for task coordination and progress tracking. These tools have introduced new methodologies for workflow management, emphasizing transparency and real-time updates. However, the rapid adoption of remote work technology has also presented challenges, including cybersecurity vulnerabilities, digital fatigue, and the need for new management approaches that maintain team cohesion without physical presence.<br><br>
+                    Organizations have had to invest heavily in digital infrastructure and employee training to ensure smooth transitions. The success of remote work largely depends on reliable internet connectivity, appropriate hardware, and comprehensive digital literacy among workforce members.
+                </div>
+                <ol>
+                    <li>
+                        What has become the backbone of modern remote work infrastructure? <span class="marks">(2 marks)</span><br>
+                        <textarea name="q1_1" required></textarea>
+                    </li>
+                    <li>
+                        Name three video conferencing tools mentioned in the passage. <span class="marks">(3 marks)</span><br>
+                        <textarea name="q1_2" required></textarea>
+                    </li>
+                    <li>
+                        What are two challenges presented by rapid adoption of remote work technology? <span class="marks">(4 marks)</span><br>
+                        <textarea name="q1_3" required></textarea>
+                    </li>
+                    <li>
+                        According to the passage, what does the success of remote work largely depend on? <span class="marks">(3 marks)</span><br>
+                        <textarea name="q1_4" required></textarea>
+                    </li>
+                </ol>
+                <div class="nav-buttons">
+                    <button type="button" id="prevBtn1" disabled>Previous</button>
+                    <button type="button" id="nextBtn1">Next</button>
+                </div>
             </div>
-            <div class="question">
-                <label>2. Write a summary of the following text:</label>
-                <textarea name="q2" required></textarea>
+            <!-- Question 2 -->
+            <div class="question-card" id="qpage-2">
+                <div class="question-title">
+                    Question 2 – Reading Comprehension <span class="marks">(13 marks)</span>
+                    <div class="clear"></div>
+                </div>
+                <div class="passage">
+                    <strong>Sustainable Energy Solutions in Developing Countries</strong><br>
+                    Developing nations face unique challenges in implementing sustainable energy solutions due to limited financial resources, inadequate infrastructure, and technological gaps. Solar power has emerged as a particularly viable option for rural communities in countries like Bangladesh, Kenya, and India, where traditional electricity grids are either unreliable or non-existent.<br><br>
+                    Microfinancing programs have played a crucial role in making solar technology accessible to low-income households. These programs allow families to purchase solar panels through small, manageable installments rather than requiring large upfront payments. Community-based energy projects have also proven successful, where entire villages pool resources to establish shared renewable energy systems.<br><br>
+                    The impact extends beyond mere electricity access. Children can study after dark, small businesses can operate longer hours, and healthcare facilities can maintain essential services. However, maintenance and technical support remain significant obstacles, as many rural areas lack trained technicians capable of servicing renewable energy equipment.
+                </div>
+                <ol>
+                    <li>
+                        What are three challenges developing nations face in implementing sustainable energy solutions? <span class="marks">(3 marks)</span><br>
+                        <textarea name="q2_1" required></textarea>
+                    </li>
+                    <li>
+                        Which countries are mentioned as examples where solar power has been viable for rural communities? <span class="marks">(3 marks)</span><br>
+                        <textarea name="q2_2" required></textarea>
+                    </li>
+                    <li>
+                        How do microfinancing programs help make solar technology accessible? <span class="marks">(3 marks)</span><br>
+                        <textarea name="q2_3" required></textarea>
+                    </li>
+                    <li>
+                        List three positive impacts mentioned that extend beyond electricity access. <span class="marks">(3 marks)</span><br>
+                        <textarea name="q2_4" required></textarea>
+                    </li>
+                    <li>
+                        What is identified as a significant obstacle in rural areas regarding renewable energy equipment? <span class="marks">(1 mark)</span><br>
+                        <textarea name="q2_5" required></textarea>
+                    </li>
+                </ol>
+                <div class="nav-buttons">
+                    <button type="button" id="prevBtn2">Previous</button>
+                    <button type="button" id="nextBtn2">Next</button>
+                </div>
             </div>
-            <div class="question">
-                <label>3. Describe the process shown in the diagram:</label>
-                <textarea name="q3" required></textarea>
+            <!-- Question 3 -->
+            <div class="question-card" id="qpage-3">
+                <div class="question-title">
+                    Question 3 – Summary Writing <span class="marks">(15 marks)</span>
+                    <div class="clear"></div>
+                </div>
+                <div class="original-text">
+                    <strong>Original Text:</strong><br>
+                    Artificial Intelligence (AI) has revolutionized various industries by automating complex processes and enhancing decision-making capabilities. In healthcare, AI algorithms analyze medical images to detect diseases with remarkable accuracy, often surpassing human radiologists in identifying early-stage cancers. Manufacturing sectors utilize AI-powered robots for precision assembly, quality control, and predictive maintenance, significantly reducing production costs and minimizing defects. Financial institutions employ machine learning models to detect fraudulent transactions, assess credit risks, and provide personalized investment recommendations. However, the widespread adoption of AI raises ethical concerns regarding job displacement, privacy protection, and algorithmic bias. Organizations must implement responsible AI practices, including transparent algorithms, regular audits, and comprehensive training programs to ensure equitable outcomes for all stakeholders.
+                </div>
+                <div class="summary-gaps">
+                    <strong>Summary (Complete the gaps using words from the passage):</strong><br>
+                    AI has <input name="q3_1" required> various industries through automation and improved decision-making. In <input name="q3_2" required>, AI algorithms analyze medical images to <input name="q3_3" required> diseases with high accuracy. <input name="q3_4" required> sectors use AI robots for assembly, quality control, and <input name="q3_5" required> maintenance, reducing costs and defects. Financial institutions use <input name="q3_6" required> learning to detect fraud and assess credit risks. However, AI adoption raises <input name="q3_7" required> concerns about job displacement, privacy, and algorithmic bias. Organizations need responsible AI practices with <input name="q3_8" required> algorithms and regular <input name="q3_9" required> to ensure equitable outcomes.
+                </div>
+                <div class="nav-buttons">
+                    <button type="button" id="prevBtn3">Previous</button>
+                    <button type="button" id="nextBtn3">Next</button>
+                </div>
             </div>
-            <div class="question">
-                <label>4. Analyze the graph and explain the trend:</label>
-                <textarea name="q4" required></textarea>
+            <!-- Question 4 -->
+            <div class="question-card" id="qpage-4">
+                <div class="question-title">
+                    Question 4 – Process Description <span class="marks">(25 marks)</span>
+                    <div class="clear"></div>
+                </div>
+                <div class="diagram-desc">
+                    <strong>The Process of Water Purification in Municipal Treatment Plants</strong><br>
+                    Write a comprehensive description of how raw water from natural sources is treated and purified for safe municipal consumption. Your description should include:
+                    <ul>
+                        <li>Pre-treatment stages</li>
+                        <li>Primary treatment processes</li>
+                        <li>Secondary treatment methods</li>
+                        <li>Final purification steps</li>
+                        <li>Quality testing procedures</li>
+                    </ul>
+                    Use clear, sequential language with appropriate transitional phrases and technical terminology. Your response should be approximately 300-400 words.
+                </div>
+                <textarea name="q4" rows="10" required></textarea>
+                <div class="nav-buttons">
+                    <button type="button" id="prevBtn4">Previous</button>
+                    <button type="button" id="nextBtn4">Next</button>
+                </div>
             </div>
-            <div class="question">
-                <label>5. Answer the technical writing question:</label>
-                <textarea name="q5" required></textarea>
+            <!-- Question 5 -->
+            <div class="question-card" id="qpage-5">
+                <div class="question-title">
+                    Question 5 – Graph Description <span class="marks">(25 marks)</span>
+                    <div class="clear"></div>
+                </div>
+                <div class="graph-desc">
+                    <strong>Global Renewable Energy Capacity Growth (2018-2024)</strong><br>
+                    <div style="text-align:center;">
+                        <img src="https://i.postimg.cc/c4mqN1D0/Screenshot-2025-06-07-221042.png" style="max-width:100%;margin:16px 0;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,0.08);display:inline-block;">
+                    </div>
+                    
+                    Write a detailed description of this graph including:
+                    <ul>
+                        <li>Overall trends and patterns</li>
+                        <li>Specific data points and comparisons</li>
+                        <li>Significant changes or developments</li>
+                        <li>Conclusions that can be drawn from the data</li>
+                    </ul>
+                    Your response should be well-structured, using appropriate vocabulary for graph description and should be approximately 250-300 words.
+                </div>
+                <textarea name="q5" rows="8" required></textarea>
+                <div class="nav-buttons">
+                    <button type="button" id="prevBtn5">Previous</button>
+                    <button type="submit" id="submitBtn">Submit Exam</button>
+                </div>
             </div>
-            <button type="submit">Submit Exam</button>
         </form>
         <div id="result" style="display:none;"></div>
     </div>
     <script src="script.js"></script>
+    <script>
+        // Navigation logic for question pages
+        const totalPages = 5;
+        let currentPage = 1;
+
+        function showPage(page) {
+            for (let i = 1; i <= totalPages; i++) {
+                document.getElementById('qpage-' + i).classList.remove('active');
+            }
+            document.getElementById('qpage-' + page).classList.add('active');
+            currentPage = page;
+        }
+
+        document.getElementById('nextBtn1').onclick = () => showPage(2);
+        document.getElementById('nextBtn2').onclick = () => showPage(3);
+        document.getElementById('nextBtn3').onclick = () => showPage(4);
+        document.getElementById('nextBtn4').onclick = () => showPage(5);
+
+        document.getElementById('prevBtn2').onclick = () => showPage(1);
+        document.getElementById('prevBtn3').onclick = () => showPage(2);
+        document.getElementById('prevBtn4').onclick = () => showPage(3);
+        document.getElementById('prevBtn5').onclick = () => showPage(4);
+
+        // Prevent form submission on Enter key in textareas/inputs
+        document.getElementById('exam-form').addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT')) {
+                e.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>
