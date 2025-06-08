@@ -307,7 +307,9 @@
                 } else {
                     clearInterval(timerInterval);
                     if (!examSubmitted) {
-                        submitExam();
+                        // Auto submit when timer is up
+                        document.getElementById('exam-form').dispatchEvent(new Event('submit', {cancelable: true, bubbles: true}));
+                        examSubmitted = true;
                     }
                 }
             }, 1000);
@@ -352,6 +354,9 @@
         document.getElementById('exam-form').addEventListener('submit', async function(e) {
             if (examSubmitted) return; // Prevent double submission
             e.preventDefault();
+
+            // Stop the timer when user submits before time is up
+            clearInterval(timerInterval);
 
             // Define marks for each question part
             const marks = {
