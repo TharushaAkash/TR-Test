@@ -122,19 +122,19 @@
                 <ol>
                     <li>
                         What has become the backbone of modern remote work infrastructure? <span class="marks">(2 marks)</span><br>
-                        <textarea name="q1_1" required></textarea>
+                        <textarea name="q1_1"></textarea>
                     </li>
                     <li>
                         Name three video conferencing tools mentioned in the passage. <span class="marks">(3 marks)</span><br>
-                        <textarea name="q1_2" required></textarea>
+                        <textarea name="q1_2"></textarea>
                     </li>
                     <li>
                         What are two challenges presented by rapid adoption of remote work technology? <span class="marks">(4 marks)</span><br>
-                        <textarea name="q1_3" required></textarea>
+                        <textarea name="q1_3"></textarea>
                     </li>
                     <li>
                         According to the passage, what does the success of remote work largely depend on? <span class="marks">(3 marks)</span><br>
-                        <textarea name="q1_4" required></textarea>
+                        <textarea name="q1_4"></textarea>
                     </li>
                 </ol>
                 <div class="nav-buttons">
@@ -157,23 +157,23 @@
                 <ol>
                     <li>
                         What are three challenges developing nations face in implementing sustainable energy solutions? <span class="marks">(3 marks)</span><br>
-                        <textarea name="q2_1" required></textarea>
+                        <textarea name="q2_1"></textarea>
                     </li>
                     <li>
                         Which countries are mentioned as examples where solar power has been viable for rural communities? <span class="marks">(3 marks)</span><br>
-                        <textarea name="q2_2" required></textarea>
+                        <textarea name="q2_2"></textarea>
                     </li>
                     <li>
                         How do microfinancing programs help make solar technology accessible? <span class="marks">(3 marks)</span><br>
-                        <textarea name="q2_3" required></textarea>
+                        <textarea name="q2_3"></textarea>
                     </li>
                     <li>
                         List three positive impacts mentioned that extend beyond electricity access. <span class="marks">(3 marks)</span><br>
-                        <textarea name="q2_4" required></textarea>
+                        <textarea name="q2_4"></textarea>
                     </li>
                     <li>
                         What is identified as a significant obstacle in rural areas regarding renewable energy equipment? <span class="marks">(1 mark)</span><br>
-                        <textarea name="q2_5" required></textarea>
+                        <textarea name="q2_5"></textarea>
                     </li>
                 </ol>
                 <div class="nav-buttons">
@@ -193,7 +193,7 @@
                 </div>
                 <div class="summary-gaps">
                     <strong>Summary (Complete the gaps using words from the passage):</strong><br>
-                    AI has <input name="q3_1" required> various industries through automation and improved decision-making. In <input name="q3_2" required>, AI algorithms analyze medical images to <input name="q3_3" required> diseases with high accuracy. <input name="q3_4" required> sectors use AI robots for assembly, quality control, and <input name="q3_5" required> maintenance, reducing costs and defects. Financial institutions use <input name="q3_6" required> learning to detect fraud and assess credit risks. However, AI adoption raises <input name="q3_7" required> concerns about job displacement, privacy, and algorithmic bias. Organizations need responsible AI practices with <input name="q3_8" required> algorithms and regular <input name="q3_9" required> to ensure equitable outcomes.
+                    AI has <input name="q3_1"> various industries through automation and improved decision-making. In <input name="q3_2">, AI algorithms analyze medical images to <input name="q3_3"> diseases with high accuracy. <input name="q3_4"> sectors use AI robots for assembly, quality control, and <input name="q3_5"> maintenance, reducing costs and defects. Financial institutions use <input name="q3_6"> learning to detect fraud and assess credit risks. However, AI adoption raises <input name="q3_7"> concerns about job displacement, privacy, and algorithmic bias. Organizations need responsible AI practices with <input name="q3_8"> algorithms and regular <input name="q3_9"> to ensure equitable outcomes.
                 </div>
                 <div class="nav-buttons">
                     <button type="button" id="prevBtn3">Previous</button>
@@ -218,7 +218,7 @@
                     </ul>
                     Use clear, sequential language with appropriate transitional phrases and technical terminology. Your response should be approximately 300-400 words.
                 </div>
-                <textarea name="q4" rows="10" required></textarea>
+                <textarea name="q4" rows="10"></textarea>
                 <div class="nav-buttons">
                     <button type="button" id="prevBtn4">Previous</button>
                     <button type="button" id="nextBtn4">Next</button>
@@ -245,16 +245,15 @@
                     </ul>
                     Your response should be well-structured, using appropriate vocabulary for graph description and should be approximately 250-300 words.
                 </div>
-                <textarea name="q5" rows="8" required></textarea>
+                <textarea name="q5" rows="8"></textarea>
                 <div class="nav-buttons">
                     <button type="button" id="prevBtn5">Previous</button>
                     <button type="submit" id="submitBtn">Submit Exam</button>
                 </div>
             </div>
         </form>
-        <div id="result" style="display:none;"></div>
+        <div id="result" style="display:none;text-align:center;font-size:1.2em;margin-top:32px;"></div>
     </div>
-    <script src="script.js"></script>
     <script>
         // Navigation logic for question pages
         const totalPages = 5;
@@ -283,6 +282,92 @@
             if (e.key === 'Enter' && (e.target.tagName === 'TEXTAREA' || e.target.tagName === 'INPUT')) {
                 e.preventDefault();
             }
+        });
+
+        // Client-side scoring logic (simulate AI scoring)
+        document.getElementById('exam-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            // Define marks for each question part
+            const marks = {
+                q1_1: 2,
+                q1_2: 3,
+                q1_3: 4,
+                q1_4: 3,
+                q2_1: 3,
+                q2_2: 3,
+                q2_3: 3,
+                q2_4: 3,
+                q2_5: 1,
+                q3_1: 2, q3_2: 2, q3_3: 2, q3_4: 2, q3_5: 2, q3_6: 1, q3_7: 2, q3_8: 1, q3_9: 1,
+                q4: 25,
+                q5: 25
+            };
+
+            // Define correct answers for auto-checking (simple, case-insensitive, partial match for demo)
+            const correct = {
+                q1_1: "cloud computing",
+                q1_2: "zoom,microsoft teams,google meet",
+                q1_3: "cybersecurity,digital fatigue",
+                q1_4: "internet connectivity,hardware,digital literacy",
+                q2_1: "financial resources,infrastructure,technological gaps",
+                q2_2: "bangladesh,kenya,india",
+                q2_3: "microfinancing,installments,upfront",
+                q2_4: "study after dark,operate longer,healthcare",
+                q2_5: "maintenance,technical support",
+                // For summary, accept any non-empty answer for demo
+                q3_1: "revolutionized",
+                q3_2: "healthcare",
+                q3_3: "detect",
+                q3_4: "manufacturing",
+                q3_5: "predictive",
+                q3_6: "machine",
+                q3_7: "ethical",
+                q3_8: "transparent",
+                q3_9: "audits",
+                // For q4 and q5, require at least 30 words for full marks, else 0
+                q4: 30,
+                q5: 30
+            };
+
+            const formData = new FormData(e.target);
+            let totalScore = 0;
+            let totalMarks = 0;
+            for (const key in marks) {
+                totalMarks += marks[key];
+                const val = (formData.get(key) || "").toLowerCase().trim();
+
+                // For summary writing (q3_1 to q3_9): require exact word
+                if (key.startsWith("q3_")) {
+                    if (val === correct[key]) {
+                        totalScore += marks[key];
+                    }
+                }
+                // For q4 and q5: require at least 30 words for full marks
+                else if (key === "q4" || key === "q5") {
+                    if (val.split(/\s+/).filter(Boolean).length >= correct[key]) {
+                        totalScore += marks[key];
+                    }
+                }
+                // For other questions: check if all required keywords are present
+                else if (correct[key]) {
+                    const keywords = correct[key].split(",");
+                    let matched = 0;
+                    for (const word of keywords) {
+                        if (val.includes(word.trim())) matched++;
+                    }
+                    if (matched === keywords.length) {
+                        totalScore += marks[key];
+                    }
+                }
+            }
+            const scoreOutOf100 = Math.round((totalScore / totalMarks) * 100);
+
+            // Show result
+            const resultEl = document.getElementById('result');
+            resultEl.style.display = 'block';
+            resultEl.innerHTML = `<strong>Your Score: ${scoreOutOf100} / 100</strong><br>Thank you for submitting your exam!`;
+            document.getElementById('exam-form').style.display = 'none';
         });
     </script>
 </body>
