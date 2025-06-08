@@ -88,6 +88,14 @@
 </head>
 <body>
     <div class="container">
+        <!-- Start Page -->
+        <div id="start-page" style="text-align:center; padding:60px 0;">
+            <h1>Welcome to the Technical Writing Exam</h1>
+            <p>This exam consists of 5 questions and will last for 3 hours.<br>
+            Click the button below to start your exam. The timer will begin immediately.</p>
+            <button id="start-exam-btn" style="padding:16px 48px; font-size:1.2em; border-radius:6px; background:#007bff; color:#fff; border:none; cursor:pointer;">Start Exam</button>
+        </div>
+        <!-- Exam Header -->
         <div class="exam-header">
             <h2>Sri Lanka Institute of Information Technology</h2>
             <div>BSc (Hons) in Information Technology</div>
@@ -96,7 +104,7 @@
             <div><strong>IT1150 – Technical Writing</strong></div>
             <div>Duration: 3 Hours &nbsp;|&nbsp; Total Marks: 100</div>
         </div>
-        <div id="timer"></div>
+        <div id="timer" style="display:none;"></div>
         <div class="instructions">
             <strong>Instructions:</strong>
             <ul>
@@ -106,7 +114,7 @@
                 <li>Write clearly and legibly</li>
             </ul>
         </div>
-        <form id="exam-form">
+        <form id="exam-form" style="display:none;">
             <!-- Question 1 -->
             <div class="question-card active" id="qpage-1">
                 <div class="question-title">
@@ -255,6 +263,62 @@
         <div id="result" style="display:none;text-align:center;font-size:1.2em;margin-top:32px;"></div>
     </div>
     <script>
+        // Move this block after all DOM elements are loaded
+        window.onload = function() {
+            // Hide exam form and timer initially
+            document.getElementById('exam-form').style.display = 'none';
+            document.getElementById('timer').style.display = 'none';
+
+            // Attach start button event after DOM is ready
+            document.getElementById('start-exam-btn').onclick = startExam;
+        };
+
+        // Timer variables
+        let examDuration = 60; // 3 hours in seconds
+        let timeLeft = examDuration;
+        let timerInterval = null;
+        let examStarted = false;
+        let examSubmitted = false;
+
+        function formatTime(secs) {
+            const h = Math.floor(secs / 3600);
+            const m = Math.floor((secs % 3600) / 60);
+            const s = secs % 60;
+            return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+
+        function updateTimer() {
+            const timerEl = document.getElementById('timer');
+            timerEl.textContent = "Time Left: " + formatTime(timeLeft);
+        }
+
+        function startExam() {
+            document.getElementById('start-page').style.display = 'none';
+            document.getElementById('exam-form').style.display = '';
+            document.getElementById('timer').style.display = '';
+            showPage(1);
+            examStarted = true;
+            timeLeft = examDuration;
+            updateTimer();
+            timerInterval = setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    updateTimer();
+                } else {
+                    clearInterval(timerInterval);
+                    if (!examSubmitted) {
+                        submitExam();
+                    }
+                }
+            }, 1000);
+        }
+
+        function submitExam() {
+            examSubmitted = true;
+            clearInterval(timerInterval);
+            document.getElementById('exam-form').dispatchEvent(new Event('submit', {cancelable: true, bubbles: true}));
+        }
+
         // Navigation logic for question pages
         const totalPages = 5;
         let currentPage = 1;
@@ -286,6 +350,7 @@
 
         // Client-side scoring logic (simulate AI scoring)
         document.getElementById('exam-form').addEventListener('submit', async function(e) {
+            if (examSubmitted) return; // Prevent double submission
             e.preventDefault();
 
             // Define marks for each question part
@@ -304,7 +369,6 @@
                 q5: 25
             };
 
-            // Define correct answers for auto-checking (simple, case-insensitive, partial match for demo)
             const correct = {
                 q1_1: "cloud computing",
                 q1_2: "zoom,microsoft teams,google meet",
@@ -315,7 +379,6 @@
                 q2_3: "microfinancing,installments,upfront",
                 q2_4: "study after dark,operate longer,healthcare",
                 q2_5: "maintenance,technical support",
-                // For summary, accept any non-empty answer for demo
                 q3_1: "revolutionized",
                 q3_2: "healthcare",
                 q3_3: "detect",
@@ -325,7 +388,6 @@
                 q3_7: "ethical",
                 q3_8: "transparent",
                 q3_9: "audits",
-                // For q4 and q5, require at least 30 words for full marks, else 0
                 q4: 30,
                 q5: 30
             };
@@ -337,20 +399,19 @@
                 totalMarks += marks[key];
                 const val = (formData.get(key) || "").toLowerCase().trim();
 
-                // For summary writing (q3_1 to q3_9): require exact word
                 if (key.startsWith("q3_")) {
                     if (val === correct[key]) {
                         totalScore += marks[key];
                     }
                 }
-                // For q4 and q5: require at least 30 words for full marks
                 else if (key === "q4" || key === "q5") {
+                    // Use word count, not sentence count
                     if (val.split(/\s+/).filter(Boolean).length >= correct[key]) {
                         totalScore += marks[key];
                     }
                 }
-                // For other questions: check if all required keywords are present
-                else if (correct[key]) {
+                else {
+                    // For other questions, check if all required keywords are present
                     const keywords = correct[key].split(",");
                     let matched = 0;
                     for (const word of keywords) {
@@ -361,12 +422,11 @@
                     }
                 }
             }
-            const scoreOutOf100 = Math.round((totalScore / totalMarks) * 100);
 
-            // Show result
-            const resultEl = document.getElementById('result');
-            resultEl.style.display = 'block';
-            resultEl.innerHTML = `<strong>Your Score: ${scoreOutOf100} / 100</strong><br>Thank you for submitting your exam!`;
+            // Display result as out of 100
+            const scoreOutOf100 = Math.round((totalScore / totalMarks) * 100);
+            document.getElementById('result').textContent = `Your Score: ${scoreOutOf100} / 100%`;
+            document.getElementById('result').style.display = '';
             document.getElementById('exam-form').style.display = 'none';
         });
     </script>
